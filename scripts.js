@@ -33,14 +33,36 @@ function toggleChat() {
     const ideaDescription = document.getElementById('ideaDescription').value;
     const targetMarket = document.getElementById('targetMarket').value;
     const businessCategory = document.getElementById('businessCategory').value;
+    const founderName = document.getElementById('founderName').value;
+    const founderExperience = document.getElementById('founderExperience').value;
     const contactEmail = document.getElementById('contactEmail').value;
   
-    if (ideaTitle && ideaDescription && targetMarket && businessCategory && contactEmail) {
-      document.getElementById('confirmationMessage').textContent = `Your business idea titled "${ideaTitle}" has been successfully submitted!`;
-    } else {
-      document.getElementById('confirmationMessage').textContent = 'Please fill in all the fields.';
-    }
+    fetch('http://localhost:3000/submitBusinessIdea', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        ideaTitle,
+        ideaDescription,
+        targetMarket,
+        businessCategory,
+        founderName,
+        founderExperience,
+        contactEmail,
+      }),
+    })
+      .then((response) => response.text())
+      .then((message) => {
+        document.getElementById('confirmationMessage').textContent = message;
+      })
+      .catch((error) => {
+        console.error('Error submitting form:', error);
+        document.getElementById('confirmationMessage').textContent =
+          'An error occurred while submitting the form.';
+      });
   }
+  
   
   // Generate certificate functionality
   function generateCertificate() {
@@ -104,4 +126,5 @@ function applyForStartupCertificate() {
     event.preventDefault();
     alert('Your message has been sent. We will get back to you shortly!');
   }
+  
   
