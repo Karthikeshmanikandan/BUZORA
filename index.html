@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BUZORA</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- Navigation Bar -->
+  <nav>
+    <ul>
+      <li><a href="#" onclick="navigateHome()">Home</a></li>
+      <li><a href="#businessIdea">Request for Business detail</a></li>
+      <li><a href="#certification">Certificates</a></li>
+      <li><a href="#feedback">Feedback</a></li>
+      <li><a href="#resources">Resources</a></li>
+      <li><a href="#team">Our Team</a></li>
+      <li><a href="#testimonials">Testimonials</a></li>
+      <li><a href="#contact">Contact Us</a></li>
+      <li><a href="#aboutUs">About Us</a></li>
+    </ul>
+    <button id="chatButton" onclick="toggleChat()">Chat</button>
+  </nav>
+  
+  <!-- Chat Window (Initially Hidden) -->
+  <div id="chatWindow" class="chat-window">
+    <div class="chat-header">
+      <h3>Chat with Us</h3>
+      <button onclick="toggleChat()">Close</button>
+    </div>
+    <div class="chat-body">
+      <p>How can we help you today?</p>
+    </div>
+    <div class="chat-footer">
+      <input type="text" id="chatInput" placeholder="Type your message..." onkeydown="sendChat(event)">
+      <button onclick="sendChat()">Send</button>
+    </div>
+  </div>
+
+  <header>
+    <h1>Welcome to the Startup Idea Improvement Platform</h1>
+    <p>Your guide to turning ideas into successful businesses</p>
+  </header>
+  
+  <main>
+      <!-- Resources Section -->
+      <section id="resources" class="resources">
+        <h2>Business Resources</h2>
+        <p>Explore valuable resources to help you succeed in your startup journey.</p>
+        <ul>
+          <li><button class="resource-btn gold" onclick="openBusinessPlanTemplate()">HOTEL</button></li>
+          <li><button class="resource-btn silver" onclick="openInvestorPitchDeck()">Investor Pitch Deck Guide</button></li>
+          <li><button class="resource-btn gold" onclick="openLegalResources()">Legal Resources for Startups</button></li>
+          <li><button class="resource-btn silver" onclick="openStartupGrants()">Startup Grants and Funding</button></li>
+          <li><button class="resource-btn black" onclick="openTimeManagementTools()">Time Management Tools</button></li>
+        </ul>
+      </section>
+    <!-- Business Idea Section -->
+    <section id="businessIdea" class="form-section">
+      <h1>For Direct support</h1>
+      <h2>Give Your Business Thought</h2>
+      
+      <form id="businessForm" onsubmit="submitBusinessIdea(event)">
+        <label for="ideaTitle">Business Idea Title:</label>
+        <input type="text" id="ideaTitle" name="ideaTitle" required>
+
+        <label for="ideaDescription">Describe Your Idea:</label>
+        <textarea id="ideaDescription" name="ideaDescription" required></textarea>
+
+        <label for="targetMarket">Where will your product/service be needed most?</label>
+        <input type="text" id="targetMarket" name="targetMarket" required>
+
+        <label for="businessCategory">Business Category:</label>
+        <select id="businessCategory" name="businessCategory" required>
+          <option value="Technology">Technology</option>
+          <option value="Healthcare">Healthcare</option>
+          <option value="Education">Education</option>
+          <option value="Retail">Retail</option>
+          <option value="Finance">Finance</option>
+        </select>
+
+        <label for="founderName">Founder Name:</label>
+        <input type="text" id="founderName" name="founderName" required>
+
+        <label for="founderExperience">Founder’s Previous Experience:</label>
+        <textarea id="founderExperience" name="founderExperience" required></textarea>
+
+        <label for="contactEmail">Your Email Address:</label>
+        <input type="email" id="contactEmail" name="contactEmail" required>
+
+        <button type="submit">Submit Idea</button>
+      </form>
+    </section>
+
+    <!-- Certification Section -->
+    <section id="certification" class="certification">
+      <h2>Get a Certificate</h2>
+      <p>We issue a certificate to validate your business idea. Once you submit your idea, you'll be eligible for certification.</p>
+      <button onclick="generateCertificate()">Request Certificate</button>
+      <p id="certificateMessage"></p>
+
+      <div id="multipleCertifications">
+        <button onclick="applyForStartupCertificate()">Startup Idea Certificate</button>
+        <button onclick="applyForInnovationCertificate()">Innovation Excellence Certificate</button>
+        <button onclick="applyForFundingCertificate()">Funding Preparedness Certificate</button>
+      </div>
+    </section>
+
+    <!-- Feedback Section -->
+    <section id="feedback" class="feedback">
+      <h2>Get Feedback on Your Idea</h2>
+      <p>Submit your business idea and receive constructive feedback from industry experts.</p>
+      <button onclick="submitFeedback()">Submit for Feedback</button>
+      <button onclick="requestExpertAdvice()">Request Expert Advice</button>
+      <p id="feedbackMessage"></p>
+    </section>
+
+  
+
+    <!-- Team Section -->
+    <section id="team" class="team">
+      <h2>Meet Our Team</h2>
+      <p>"We are a team of thinkers and innovators, driven by our shared belief in the power of collaboration to build transformative and meaningful solutions."</p>
+      <ul>
+        <li>Karthikesh Manikandan.G</li>
+        <li>Habeebullah.M</li>
+        <li>karthick.A</li>
+        <li>karthick.A</li>
+      </ul>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section id="testimonials" class="testimonials">
+      <h2>Success Stories</h2>
+      <p>Read inspiring success stories from users who have turned their ideas into successful businesses.</p>
+      <blockquote>
+        "This platform helped me refine my startup idea and connect with the right people. Highly recommended!" – Krish.H
+      </blockquote>
+      <blockquote>
+        "The feedback and resources were invaluable in getting my business off the ground. Thank you!" – Rajesh.S
+      </blockquote>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+      <h2>Contact Us</h2>
+      <p>Have questions or need support? Reach out to us directly!</p>
+      <form id="contactForm" onsubmit="submitContactForm(event)">
+        <label for="contactName">Your Name:</label>
+        <input type="text" id="contactName" name="contactName" required>
+
+        <label for="contactEmail">Your Email:</label>
+        <input type="email" id="contactEmail" name="contactEmail" required>
+
+        <label for="contactMessage">Your Message:</label> 
+        <textarea id="contactMessage" name="contactMessage" required></textarea>
+
+        <button type="submit">Send Message</button>
+      </form>
+    </section>
+
+    <!-- About Us Section -->
+    <section id="aboutUs" class="about-us">
+      <h2>About Us</h2>
+      <p>We are a platform that helps students and freshers turn their startup ideas into reality. Our mission is to provide mentorship, feedback, resources, and networking opportunities to aspiring entrepreneurs. We believe that every great idea deserves a chance to succeed, and we're here to guide you on that journey!</p>
+    </section>
+    
+    <div id="confirmationMessage"></div>
+  </main>
+
+  
+
+  <script src="scripts.js"></script>
+</body>
+</html>
