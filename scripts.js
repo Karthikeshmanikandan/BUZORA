@@ -70,9 +70,11 @@ function toggleChat() {
   }
   
   // Submit feedback
-  function submitFeedback() {
-    document.getElementById('feedbackMessage').textContent = 'Your idea is being reviewed by experts. You will receive feedback soon!';
+  function navigateToFeedback() {
+    // Navigate to the feedback page
+    window.location.href = 'feedback.html'; // Ensure the path is correct based on your folder structure
   }
+  
   
   // Resource button actions
   function openBusinessPlanTemplate() {
