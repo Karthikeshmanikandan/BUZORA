@@ -11,7 +11,7 @@
   <!-- Navigation Bar -->
   <nav>
     <ul>
-      <li><a href="#businessIdea">Request for Business detail</a></li>
+      <li><a href="#businessIdea">Request for Business Detail</a></li>
       <li><a href="#certification">Certificates</a></li>
       <li><a href="#feedback">Feedback</a></li>
       <li><a href="#resources">Resources</a></li>
@@ -39,28 +39,31 @@
   </div>
 
   <header>
-    <h1>Welcome to the BUZORA</h1>
+    <h1>Welcome to BUZORA</h1>
     <p>Your guide to turning ideas into successful businesses</p>
+    <img src="header-banner.jpg" alt="Startup Business Guide" class="header-img">
   </header>
   
   <main>
       <!-- Resources Section -->
       <section id="resources" class="resources">
         <h2>Business Resources</h2>
+        <img src="resources-banner.jpg" alt="Business Resources" class="section-img">
         <p>Explore valuable resources to help you succeed in your startup journey.</p>
         <ul>
           <li><button class="resource-btn gold" onclick="window.location.href='food_service_business.html'">Hotel</button></li>
-          <li><button class="resource-btn silver" onclick="openInvestorPitchDeck()">Pc building</button></li>
-          <li><button class="resource-btn gold" onclick="openLegalResources()">Academy</button></li>
-          <li><button class="resource-btn silver" onclick="openStartupGrants()">Event Organizing</button></li>
-          <li><button class="resource-btn black" onclick="openTimeManagementTools()">DIgital Marketing</button></li>
+          <li><button class="resource-btn silver" onclick="window.location.href='pc_building_business.html'">PC building</button></li>
+          <li><button class="resource-btn gold" onclick="window.location.href='home_tutor_business.html'">Academy</button></li>
+          <li><button class="resource-btn silver" onclick="window.location.href='event_organizing_business.html'">Event Organizing</button></li>
+          <li><button class="resource-btn black"onclick="window.location.href='digital_marketing_business.html'">Digital Marketing</button></li>
         </ul>
       </section>
+
     <!-- Business Idea Section -->
     <section id="businessIdea" class="form-section">
-      <h1>For Direct support</h1>
+      <h1>For Direct Support</h1>
       <h2>Give Your Business Thought</h2>
-      
+      <img src="business-idea.jpg" alt="Business Ideas" class="section-img">
       <form id="businessForm" onsubmit="submitBusinessIdea(event)">
         <label for="ideaTitle">Business Idea Title:</label>
         <input type="text" id="ideaTitle" name="ideaTitle" required>
@@ -93,12 +96,20 @@
       </form>
     </section>
 
+    <!-- Feedback Section -->
+    <section id="feedback" class="feedback">
+      <h2>Share Your Thoughts</h2>
+      <img src="feedback.jpg" alt="Feedback Section" class="section-img">
+      <p>"Your insights are the building blocks of our evolution. Share your thoughts and help us innovate for tomorrow!"</p>
+      <button onclick="navigateToFeedback()">Submit for Feedback</button>
+      <p id="feedbackMessage"></p>
+    </section>
+
     <!-- Certification Section -->
     <section id="certification" class="certification">
       <h2>Get a Certificate</h2>
+      <img src="certification.jpg" alt="Certification" class="section-img">
       <p>We issue a certificate to validate your business idea. Once you submit your idea, you'll be eligible for certification.</p>
-      
-
       <div id="multipleCertifications">
         <button onclick="applyForStartupCertificate()">Startup Idea Certificate</button>
         <button onclick="applyForInnovationCertificate()">Innovation Excellence Certificate</button>
@@ -106,72 +117,27 @@
       </div>
     </section>
 
-    <!-- Feedback Section -->
-    <section id="feedback" class="feedback">
-      <h2>Share Your Thoughts</h2>
-      <p>"Your insights are the building blocks of our evolution. Share your thoughts and help us innovate for tomorrow!"</p>
-      <button onclick="navigateToFeedback()">Submit for Feedback</button>
-      <p id="feedbackMessage"></p>
-    </section>
-    
-
-  
-
     <!-- Team Section -->
     <section id="team" class="team">
       <h2>Meet Our Team</h2>
+      <img src="team.jpg" alt="Team Members" class="section-img">
       <p>"We are a team of thinkers and innovators, driven by our shared belief in the power of collaboration to build transformative and meaningful solutions."</p>
       <ul>
         <li>Karthikesh Manikandan.G</li>
         <li>Habeebullah.M</li>
-        <li>karthick.A</li>
-        <li>karthick.A</li>
+        <li>Karthick.A</li>
+        <li>Karthick.A</li>
       </ul>
     </section>
-
-    <!-- Testimonials Section -->
-    <section id="testimonials" class="testimonials">
-      <h2>Success Stories</h2>
-      <p>Read inspiring success stories from users who have turned their ideas into successful businesses.</p>
-      <blockquote>
-        "This platform helped me refine my startup idea and connect with the right people. Highly recommended!" – Krish.H
-      </blockquote>
-      <blockquote>
-        "The feedback and resources were invaluable in getting my business off the ground. Thank you!" – Rajesh.S
-      </blockquote>
-    </section>
-
-    <!-- Contact Section -->
-    <section id="contact" class="contact">
-      <h2>Contact Us</h2>
-      <p>Have questions or need support? Reach out to us directly!</p>
-      <form id="contactForm" onsubmit="submitContactForm(event)">
-        <label for="contactName">Your Name:</label>
-        <input type="text" id="contactName" name="contactName" required>
-
-        <label for="contactEmail">Your Email:</label>
-        <input type="email" id="contactEmail" name="contactEmail" required>
-
-        <label for="contactMessage">Your Message:</label> 
-        <textarea id="contactMessage" name="contactMessage" required></textarea>
-
-        <button type="submit">Send Message</button>
-      </form>
-    </section>
-
-    <!-- About Us Section -->
-     <footer>
-    <section id="aboutUs" class="about-us">
-      <h2>About Us</h2>
-      <p>We are a platform that helps students and freshers turn their startup ideas into reality. Our mission is to provide mentorship, feedback, resources, and networking opportunities to aspiring entrepreneurs. We believe that every great idea deserves a chance to succeed, and we're here to guide you on that journey!</p>
-    </section>
-  </footer>
-    
-    <div id="confirmationMessage"></div>
   </main>
 
-  
+  <footer>
+    <section id="aboutUs" class="about-us">
+      <h2>About Us</h2>
+      <img src="about-us.jpg" alt="About Us" class="section-img">
+      <p>We are a platform that helps students and freshers turn their startup ideas into reality. Our mission is to provide mentorship, feedback, resources, and networking opportunities to aspiring entrepreneurs.</p>
+    </section>
+  </footer>
 
-  <script src="scripts.js"></script>
 </body>
 </html>
