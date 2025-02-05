@@ -29,42 +29,22 @@ async function sendChat() {
     chatBody.scrollTop = chatBody.scrollHeight;
     document.getElementById("chatInput").value = "";
 }
-// Fetch response from Google Gemini API
-async function fetchGeminiResponse(userInput) { 
-    const apiKey = 'AIzaSyDTGkw9dh4GCfbcAeFviMIiCfHx6pQQolo';  // Replace with a valid key
-    const url = `http://generativelanguage.googleapis.com/v1/models/gemini-pro:generateText?key=${apiKey}`;
-    
-    const options = {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-            prompt: { 
-                text: userInput 
-            },
-            temperature: 0.9,
-            maxTokens: 256
-        })
-    };
-    
-    try {
-        const response = await fetch(url, options);
-        const result = await response.json();
-        console.log("Full API Response:", result);  // Debugging: Print full API response
-        
-        if (result.error) {
-            console.error("API Error:", result.error);
-            return `API Error: ${result.error.message}`;
-        }
 
-        if (result && result.candidates && result.candidates.length > 0) {
-            return result.candidates[0].output;
-        } else {
-            return "Sorry, I couldn't process your request.";
-        }
+// Fetch response from backend server (Node.js)
+async function fetchGeminiResponse(userInput) { 
+    try {
+        const response = await fetch("http://localhost:5000/chat", {  // Call local backend
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({ message: userInput })  // Send message to backend
+        });
+
+        const result = await response.json();
+        return result.reply;
     } catch (error) {
-        console.error("Network or Fetch Error:", error);
+        console.error("Error:", error);
         return "An error occurred while fetching response.";
     }
 }
