@@ -18,7 +18,7 @@ async function sendChat() {
     typingMessage.innerHTML = "<strong>Bot:</strong> Typing...";
     chatBody.appendChild(typingMessage);
 
-    // Get response from Google Gemini AI
+    // Get response from API
     let response = await fetchGeminiResponse(chatInput);
 
     // Remove "Typing..." message
@@ -29,41 +29,42 @@ async function sendChat() {
     chatBody.scrollTop = chatBody.scrollHeight;
     document.getElementById("chatInput").value = "";
 }
-
-// Fetch response from Google Gemini AI
-async function fetchGeminiResponse(userInput){ 
-    const url = 'https://chatgpt-42.p.rapidapi.com/matag2';
-    console.log("Fetching Response from url: ", url)
+// Fetch response from Google Gemini API
+async function fetchGeminiResponse(userInput) { 
+    const apiKey = 'AIzaSyDTGkw9dh4GCfbcAeFviMIiCfHx6pQQolo';  // Replace with a valid key
+    const url = `http://generativelanguage.googleapis.com/v1/models/gemini-pro:generateText?key=${apiKey}`;
+    
     const options = {
         method: 'POST',
         headers: {
-            'x-rapidapi-key': '200bec7aacmsh19148d7fcb28284p13bcefjsn654b24fecfed',
-            'x-rapidapi-host': 'chatgpt-42.p.rapidapi.com',
             'Content-Type': 'application/json'
         },
-        body: {
-            messages: [
-                {
-                    role: 'user',
-                    content: 'hello'
-                }
-            ],
-            system_prompt: '',
+        body: JSON.stringify({
+            prompt: { 
+                text: userInput 
+            },
             temperature: 0.9,
-            top_k: 5,
-            top_p: 0.9,
-            image: '',
-            max_tokens: 256
-        }
+            maxTokens: 256
+        })
     };
     
     try {
         const response = await fetch(url, options);
-        const result = await response.text();
-        console.log("Result",result);
-    } catch (error) {
-        console.log("Error occured while fetching.")
+        const result = await response.json();
+        console.log("Full API Response:", result);  // Debugging: Print full API response
         
-        console.error(error);
+        if (result.error) {
+            console.error("API Error:", result.error);
+            return `API Error: ${result.error.message}`;
+        }
+
+        if (result && result.candidates && result.candidates.length > 0) {
+            return result.candidates[0].output;
+        } else {
+            return "Sorry, I couldn't process your request.";
+        }
+    } catch (error) {
+        console.error("Network or Fetch Error:", error);
+        return "An error occurred while fetching response.";
     }
 }
