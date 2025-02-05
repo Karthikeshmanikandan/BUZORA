@@ -1,62 +1,42 @@
-const express = require('express');
-const bodyParser = require('body-parser');
-const mysql = require('mysql2');
-const cors = require('cors');
+const express = require("express");
+const cors = require("cors");
+const fetch = require("node-fetch");  // Import fetch for API requests
 
 const app = express();
-app.use(cors());
-app.use(bodyParser.json());
+const PORT = 5000;
+const API_KEY = "AIzaSyDTGkw9dh4GCfbcAeFviMIiCfHx6pQQolo";  // Replace with your real API key
 
-// Database connection
-const db = mysql.createConnection({
-  host: 'localhost',
-  user: 'your_username', // Replace with your MySQL username
-  password: 'your_password', // Replace with your MySQL password
-  database: 'your_database_name', // Replace with your database name
-});
+app.use(cors()); // Enable CORS
+app.use(express.json()); // Parse JSON request body
 
-db.connect((err) => {
-  if (err) {
-    console.error('Database connection error:', err);
-  } else {
-    console.log('Connected to the database');
-  }
-});
+// Route to handle chatbot requests
+app.post("/chat", async (req, res) => {
+    try {
+        const userInput = req.body.message;
+        
+        const response = await fetch(`https://generativelanguage.googleapis.com/v1/models/gemini-pro:generateText?key=${API_KEY}`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                prompt: { text: userInput },
+                temperature: 0.9,
+                maxTokens: 256
+            })
+        });
 
-// Handle form submission
-app.post('/submitBusinessIdea', (req, res) => {
-  const {
-    ideaTitle,
-    ideaDescription,
-    targetMarket,
-    businessCategory,
-    founderName,
-    founderExperience,
-    contactEmail,
-  } = req.body;
-
-  const query = `
-    INSERT INTO business_ideas 
-    (idea_title, idea_description, target_market, business_category, founder_name, founder_experience, contact_email)
-    VALUES (?, ?, ?, ?, ?, ?, ?)
-  `;
-
-  db.query(
-    query,
-    [ideaTitle, ideaDescription, targetMarket, businessCategory, founderName, founderExperience, contactEmail],
-    (err, result) => {
-      if (err) {
-        console.error('Error inserting data:', err);
-        res.status(500).send('Failed to save data');
-      } else {
-        res.status(200).send('Business idea submitted successfully');
-      }
+        const data = await response.json();
+        if (data.candidates && data.candidates.length > 0) {
+            res.json({ reply: data.candidates[0].output });
+        } else {
+            res.json({ reply: "I couldn't process your request." });
+        }
+    } catch (error) {
+        console.error("Error:", error);
+        res.status(500).json({ reply: "Error fetching response." });
     }
-  );
 });
 
-// Start the server
-const PORT = 3000;
-app.listen(PORT, () => {
-  console.log(`Server running on http://localhost:${PORT}`);
-});
+// Start server
+app.listen(PORT, () => console.log(`Server running on http://localhost:${PORT}`));
