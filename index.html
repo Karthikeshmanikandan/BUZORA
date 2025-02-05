@@ -4,14 +4,16 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>BUZORA</title>
+  <link rel="icon" type="logo.png" href="favicon.ico">
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
   <!-- Navigation Bar -->
   <nav>
+    
     <ul>
-      <li><a href="#businessIdea">Request for Business Detail</a></li>
+      
       <li><a href="#certification">Certificates</a></li>
       <li><a href="#feedback">Feedback</a></li>
       <li><a href="#resources">Resources</a></li>
@@ -64,7 +66,6 @@
     <section id="businessIdea" class="form-section">
       <h1>For Direct Support</h1>
       <h2>Give Your Business Thought</h2>
-       <!-- <img src="business-idea.jpg" alt="Business Ideas" class="section-img"> --> -->
       <form id="businessForm" onsu bmit="submitBusinessIdea(event)">
         <label for="ideaTitle">Business Idea Title:</label>
         <input type="text" id="ideaTitle" name="ideaTitle" required>
@@ -99,8 +100,9 @@
 
     <!-- Feedback Section -->
     <section id="feedback" class="feedback">
-      <h2>Share Your Thoughts</h2>
+      <h2 style="line-height : 4">Share Your Thoughts</h2>
       <p>"Your insights are the building blocks of our evolution. Share your thoughts and help us innovate for tomorrow!"</p>
+      <p style="line-height: 3;">&nbsp;</p>
       <button onclick="window.location.href='feedback.html'">Submit for Feedback</button>
       <p id="feedbackMessage"></p>
     </section>
@@ -110,18 +112,18 @@
 
     <!-- Team Section -->
     <section id="team" class="team">
-      <h2>Meet Our Team</h2>
+      <h2 style="line-height : 4">Meet Our Team</h2>
       <div class="team-container">
         <div class="team-member fade-right">
             <img src="-oe32s6.jpg" alt="karthikesh manikandan.G">
             <h3>karthikesh manikandan.G</h3>
         </div>
         <div class="team-member fade-right">
-            <img src="" alt="habbebulah.M">
+            <img src="IMG-20240522-WA0012.jpg" alt="habbebulah.M">
             <h3>habbebulah.M</h3>
         </div>
         <div class="team-member fade-right">
-            <img src="1735014259703.jpg" alt="karthick.A">
+            <img src="1735014259518.jpg" alt="karthick.A">
             <h3>karthick.A</h3>
         </div>
         <div class="team-member fade-right">
@@ -135,7 +137,6 @@
   <footer>
     <section id="aboutUs" class="about-us">
       <h2>About Us</h2>
-      <img src="about-us.jpg" alt="About Us" class="section-img">
       <p>We are a platform that helps students and freshers turn their startup ideas into reality. Our mission is to provide mentorship, feedback, resources, and networking opportunities to aspiring entrepreneurs.</p>
     </section>
   </footer>

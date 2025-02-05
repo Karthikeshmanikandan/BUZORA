@@ -1,6 +1,3 @@
-// Google Gemini API Key (Replace with your actual key)
-const GEMINI_API_KEY = "AIzaSyDTGkw9dh4GCfbcAeFviMIiCfHx6pQQolo";
-
 // Handle Enter key press
 function handleKeyPress(event) {
     if (event.key === "Enter") {
@@ -34,22 +31,39 @@ async function sendChat() {
 }
 
 // Fetch response from Google Gemini AI
-async function fetchGeminiResponse(userInput) {
+async function fetchGeminiResponse(userInput){ 
+    const url = 'https://chatgpt-42.p.rapidapi.com/matag2';
+    console.log("Fetching Response from url: ", url)
+    const options = {
+        method: 'POST',
+        headers: {
+            'x-rapidapi-key': '200bec7aacmsh19148d7fcb28284p13bcefjsn654b24fecfed',
+            'x-rapidapi-host': 'chatgpt-42.p.rapidapi.com',
+            'Content-Type': 'application/json'
+        },
+        body: {
+            messages: [
+                {
+                    role: 'user',
+                    content: 'hello'
+                }
+            ],
+            system_prompt: '',
+            temperature: 0.9,
+            top_k: 5,
+            top_p: 0.9,
+            image: '',
+            max_tokens: 256
+        }
+    };
+    
     try {
-        const response = await fetch(`https://generativelanguage.googleapis.com/v1beta2/models/gemini-pro:generateText?key=${GEMINI_API_KEY}`, {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-                prompt: { text: userInput }
-            })
-        });
-
-        const data = await response.json();
-        return data.candidates[0].output || "Sorry, I couldn't understand that.";
+        const response = await fetch(url, options);
+        const result = await response.text();
+        console.log("Result",result);
     } catch (error) {
-        console.error("Error:", error);
-        return "Oops! Something went wrong. Please try again.";
+        console.log("Error occured while fetching.")
+        
+        console.error(error);
     }
 }

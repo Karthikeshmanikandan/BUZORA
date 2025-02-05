@@ -1,6 +1,6 @@
-CREATE DATABASE your_database_name;
+CREATE DATABASE database;
 
-USE your_database_name;
+USE database;
 
 CREATE TABLE business_ideas (
   id INT AUTO_INCREMENT PRIMARY KEY,
