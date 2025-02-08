@@ -15,34 +15,23 @@
         <li><a href="#feedback">Feedback</a></li>
         <li><a href="#resources">Resources</a></li>
         <li><a href="#team">Our Team</a></li>
-        <li><a href="#testimonials">Testimonials</a></li>
-        <li><a href="#contact">Contact Us</a></li>
+        <li><a href="#testimonial">Testimonials</a></li>
         <li><a href="#aboutUs">About Us</a></li>
-        <li><a href="chatbot.html">Chat with Us</a></li>
+        <li><a href="/chatbot/chatbot.html">Chat with Us</a></li>
       </ul>
     </nav>
 
-    <!-- Chat Window (Initially Hidden) -->
-    <div id="chatWindow" class="chat-window">
-      <div class="chat-header">
-        <h3>Chat with Us</h3>
-        <button onclick="toggleChat()">Close</button>
-      </div>
-      <div class="chat-body">
-        <p>How can we help you today?</p>
-      </div>
-      <div class="chat-footer">
-        <input type="text" id="chatInput" placeholder="Type your message..." onkeydown="sendChat(event)" />
-        <button onclick="sendChat()">Send</button>
-      </div>
-    </div>
-
+ 
     <header class="hero-section">
       <div class="overlay">
         <h1>Welcome to BUZORA</h1>
         <p>Your guide to turning ideas into successful businesses</p>
       </div>
     </header>
+
+
+
+
 
     <main>
       <!-- Resources Section -->
@@ -52,32 +41,33 @@
         <p>Explore valuable resources to help you succeed in your startup journey.</p>
         <ul>
           <li>
-            <button class="resource-btn gold" onclick="window.location.href='food_service'">Hotel</button>
+            <button class="button" onclick="window.location.href='food_service'">Hotel</button>
           </li>
           <li>
-            <button class="resource-btn silver" onclick="window.location.href='pc_building'">PC building</button>
+            <button class="button" onclick="window.location.href='pc_building'">PC building</button>
           </li>
           <li>
-            <button class="resource-btn gold" onclick="window.location.href='home_tutor'">Academy</button>
+            <button class="button" onclick="window.location.href='home_tutor'">Academy</button>
           </li>
           <li>
-            <button class="resource-btn silver" onclick="window.location.href='event_organizing'">
-              Event Organizing
-            </button>
+            <button class="button" onclick="window.location.href='event_organizing'">Event Organizing</button>
           </li>
           <li>
-            <button class="resource-btn black" onclick="window.location.href='digital_marketing'">
-              Digital Marketing
-            </button>
+            <button class="button" onclick="window.location.href='digital_marketing'">Digital Marketing</button>
           </li>
         </ul>
       </section>
+
+
+
+
+
 
       <!-- Business Idea Section -->
       <section id="businessIdea" class="form-section">
         <h1>For Direct Support</h1>
         <h2>Give Your Business Thought</h2>
-        <form id="businessForm" onsu bmit="submitBusinessIdea(event)">
+          <form id="businessForm" onsu bmit="submitBusinessIdea(event)">
           <label for="ideaTitle">Business Idea Title:</label>
           <input type="text" id="ideaTitle" name="ideaTitle" required />
 
@@ -121,7 +111,49 @@
         <p id="feedbackMessage"></p>
       </section>
 
-      <!-- Certification Section -->
+      <!-- Tesitimonial Section -->
+<section class="testimonial" id="testimonial">
+  <div class="container">
+
+      <div class="heading white-heading">
+          Testimonial
+      </div>
+      <div id="testimonial4" class="carousel slide testimonial4_indicators testimonial4_control_button thumb_scroll_x swipe_x" data-ride="carousel" data-pause="hover" data-interval="5000" data-duration="2000">
+       
+          <div class="carousel-inner" role="listbox">
+              <div class="carousel-item active">
+                  <div class="testimonial4_slide">
+                      <img src="https://i.ibb.co/8x9xK4H/team.jpg" class="img-circle img-responsive" />
+                      <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. </p>
+                      <h4>Client 1</h4>
+                  </div>
+              </div>
+              <div class="carousel-item">
+                  <div class="testimonial4_slide">
+                      <img src="https://i.ibb.co/8x9xK4H/team.jpg" class="img-circle img-responsive" /><p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. </p>
+                      <h4>Client 2</h4>
+                  </div>
+              </div>
+              <div class="carousel-item">
+                  <div class="testimonial4_slide">
+                      <img src="https://i.ibb.co/8x9xK4H/team.jpg" class="img-circle img-responsive" />
+                      <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. </p>
+                      <h4>Client 3</h4>
+                  </div>
+              </div>
+          </div>
+          <a class="carousel-control-prev" href="#testimonial4" data-slide="prev">
+              <span class="carousel-control-prev-icon"></span>
+          </a>
+          <a class="carousel-control-next" href="#testimonial4" data-slide="next">
+              <span class="carousel-control-next-icon"></span>
+          </a>
+      </div>
+  </div>
+</section>
+<!-- partial -->
+<script src='https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js'></script>
+<script src='https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js'></script>
 
       <!-- Team Section -->
       <section id="team" class="team">
