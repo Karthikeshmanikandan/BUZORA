@@ -80,7 +80,3 @@ document.addEventListener("DOMContentLoaded", async function () {
     // Fetch and display news on page load
     fetchNews();
 });
-//footer
-// Set the current year dynamically in the footer
-document.getElementById("year").textContent = new Date().getFullYear();
-
