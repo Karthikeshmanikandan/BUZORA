@@ -1,4 +1,9 @@
-// Firebase Configuration - Replace with your Firebase credentials
+// Import necessary Firebase modules
+import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.0/firebase-app.js";
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/11.0.0/firebase-auth.js";
+import { getFirestore, doc, setDoc } from "https://www.gstatic.com/firebasejs/11.0.0/firebase-firestore.js";
+
+// Firebase Configuration (Replace with your actual credentials)
 const firebaseConfig = {
     apiKey: "AIzaSyBEfoAN8oJwUeVVBhWg2_x-zFIQ091a0dU",
     authDomain: "buzora.firebaseapp.com",
@@ -6,53 +11,53 @@ const firebaseConfig = {
     storageBucket: "buzora.firebasestorage.app",
     messagingSenderId: "769706782701",
     appId: "1:769706782701:web:a80d0e40d4dfd5a181c1e4"
-  };
+};
 
 // Initialize Firebase
-firebase.initializeApp(firebaseConfig);
-const auth = firebase.auth();
-const db = firebase.firestore();
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const db = getFirestore(app);
+
+console.log("Firebase v11 Initialized Successfully!");
 
 // Signup Function
-document.querySelector(".signup form").addEventListener("submit", function (event) {
+document.querySelector(".signup form").addEventListener("submit", async function (event) {
     event.preventDefault();
+    
+    let username = document.querySelector(".signup input[name='txt']").value;
+    let email = document.querySelector(".signup input[name='email']").value;
+    let password = document.querySelector(".signup input[name='pswd']").value;
 
-    let username = event.target[0].value;
-    let email = event.target[1].value;
-    let password = event.target[2].value;
+    try {
+        const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+        const user = userCredential.user;
 
-    auth.createUserWithEmailAndPassword(email, password)
-        .then((userCredential) => {
-            let user = userCredential.user;
-
-            // Save user data to Firestore
-            return db.collection("users").doc(user.uid).set({
-                username: username,
-                email: email
-            });
-        })
-        .then(() => {
-            alert("Signup successful! You can now log in.");
-            document.getElementById("chk").checked = false; // Switch to login form
-        })
-        .catch((error) => {
-            alert("Error: " + error.message);
+        // Store user details in Firestore
+        await setDoc(doc(db, "users", user.uid), {
+            username: username,
+            email: email,
+            createdAt: new Date()
         });
+
+        alert("Signup successful! You can now log in.");
+        document.getElementById("chk").checked = false;
+    } catch (error) {
+        alert("Signup Error: " + error.message);
+    }
 });
 
 // Login Function
-document.querySelector(".login form").addEventListener("submit", function (event) {
+document.querySelector(".login form").addEventListener("submit", async function (event) {
     event.preventDefault();
 
-    let email = event.target[0].value;
-    let password = event.target[1].value;
+    let email = document.querySelector(".login input[name='email']").value;
+    let password = document.querySelector(".login input[name='pswd']").value;
 
-    auth.signInWithEmailAndPassword(email, password)
-        .then((userCredential) => {
-            alert("Login successful!");
-            window.location.href = "/main/index.html"; // Redirect to dashboard page
-        })
-        .catch((error) => {
-            alert("Error: " + error.message);
-        });
+    try {
+        await signInWithEmailAndPassword(auth, email, password);
+        alert("Login successful!");
+        window.location.href = "/main/index.html"; // Redirect after login
+    } catch (error) {
+        alert("Login Error: " + error.message);
+    }
 });
