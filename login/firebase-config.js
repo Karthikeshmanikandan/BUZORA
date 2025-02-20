@@ -1,5 +1,7 @@
+
+
 export const firebaseConfig = {
-    apiKey: "AIzaSyBEfoAN8oJwUeVVBhWg2_x-zFIQ091a0dU",
+  apiKey: "AIzaSyBEfoAN8oJwUeVVBhWg2_x-zFIQ091a0dU",
   authDomain: "buzora.firebaseapp.com",
   projectId: "buzora",
   storageBucket: "buzora.firebasestorage.app",

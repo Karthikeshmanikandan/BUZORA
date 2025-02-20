@@ -58,6 +58,6 @@ document.querySelector(".login form").addEventListener("submit", async function 
         alert("Login successful!");
         window.location.href = "/main/index.html"; // Redirect after login
     } catch (error) {
-        alert("Login Error: " + error.message);
+        alert("INVALID PLEASE SIGN IN BEFORE LOG IN");
     }
 });
