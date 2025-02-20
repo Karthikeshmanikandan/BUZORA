@@ -76,3 +76,12 @@ button:active {
 .post-resource-btn:hover {
     background-color: #000000;
 }
+
+
+.modal {
+  background: white;
+  padding: 70px 50px;
+  border: 1px solid #ccc;
+  margin-top: 20px;
+  border-radius: 5px;
+}
