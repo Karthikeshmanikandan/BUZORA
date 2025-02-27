@@ -1,80 +1,70 @@
 document.addEventListener("DOMContentLoaded", function () {
     console.log("Page fully loaded.");
 
-    // ✅ Ensure Firestore (`db`) is available
     if (typeof db === "undefined") {
         console.error("Firebase Firestore is not initialized. Check firebase-config.js.");
         return;
     }
 
-    // ✅ Ensure the container exists before appending elements
-    const container = document.getElementById("businessPlansContainer");
+    const container = document.getElementById("startupQuestionsContainer");
     if (!container) {
-        console.error("Error: 'businessPlansContainer' not found in the DOM.");
+        console.error("Error: 'startupQuestionsContainer' not found in the DOM.");
         return;
     }
 
-    async function getBusinessPlans() {
+    async function getStartupQuestions() {
         try {
-            console.log("Fetching business plans...");
-            const querySnapshot = await db.collection("business_plans").get();
+            console.log("Fetching startup questions...");
+            const querySnapshot = await db.collection("startup_questions").get();
 
             if (querySnapshot.empty) {
-                console.warn("No business plans found.");
-                container.innerHTML = "<p>No business plans available.</p>";
+                console.warn("No startup questions found.");
+                container.innerHTML = "<p>No questions available.</p>";
                 return;
             }
 
             querySnapshot.forEach((doc) => {
                 const data = doc.data();
-                console.log("Business Plan Fetched:", data);
+                console.log("Startup Question Fetched:", data);
 
-                // ✅ Create a unique button for each business plan
                 const button = document.createElement("button");
-                button.textContent = data.title || "Unnamed Business Plan";
-                button.classList.add("business-plan-button");
-
-                // ✅ Add a click event to show details
+                button.textContent = data.userName + "'s Startup Questions";
+                button.classList.add("startup-question-button");
                 button.addEventListener("click", function () {
-                    showBusinessPlanDetails(data);
+                    showStartupQuestionDetails(data);
                 });
-
-                // ✅ Append to the existing container
                 container.appendChild(button);
             });
         } catch (error) {
-            console.error("Error fetching business plans:", error);
+            console.error("Error fetching startup questions:", error);
         }
     }
 
-    function showBusinessPlanDetails(plan) {
-        const detailsContainer = document.getElementById("planDetails");
-
+    function showStartupQuestionDetails(questionData) {
+        const detailsContainer = document.getElementById("questionDetails");
         if (!detailsContainer) {
-            console.error("Error: 'planDetails' container not found.");
+            console.error("Error: 'questionDetails' container not found.");
             return;
         }
 
-        // ✅ Format plan details into a readable format
         detailsContainer.innerHTML = `
-            <h2>${plan.title || "Business Plan"}</h2>
-            <p><strong>Description:</strong> ${plan.description || "No description available."}</p>
-            <p><strong>Founder:</strong> ${plan.founder || "Unknown"}</p>
-            <p><strong>Industry:</strong> ${plan.industry || "N/A"}</p>
-            <p><strong>Funding Required:</strong> ${plan.funding || "Not specified"}</p>
+            <h2>${questionData.userName}'s Startup Questions</h2>
+            <p><strong>Company:</strong> ${questionData.companyName || "N/A"}</p>
+            <p><strong>Email:</strong> ${questionData.userEmail}</p>
+            <p><strong>Experience:</strong> ${questionData.userExperience || "No experience specified"}</p>
+            <h3>Questions & Answers:</h3>
+            <ul>
+                ${Object.entries(questionData.responses).map(([question, answer]) => `<li><strong>${question}:</strong> ${answer}</li>`).join('')}
+            </ul>
             <button onclick="closeDetails()">Close</button>
         `;
-
-        // ✅ Show the modal or details section
         detailsContainer.style.display = "block";
     }
 
-    // ✅ Function to close details
     window.closeDetails = function () {
-        const detailsContainer = document.getElementById("planDetails");
+        const detailsContainer = document.getElementById("questionDetails");
         if (detailsContainer) detailsContainer.style.display = "none";
     };
 
-    // ✅ Fetch business plans when the page loads
-    getBusinessPlans();
+    getStartupQuestions();
 });

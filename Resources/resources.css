@@ -78,10 +78,92 @@ button:active {
 }
 
 
-.modal {
-  background: white;
-  padding: 70px 50px;
+/* CSS for User Resource Form */
+#businessForm {
+  background: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  width: 50%;
+  margin: auto;
+}
+
+#businessForm label {
+  display: block;
+  margin-top: 10px;
+  font-weight: bold;
+}
+
+#businessForm input, #businessForm textarea {
+  width: 100%;
+  padding: 10px;
+  margin-top: 5px;
   border: 1px solid #ccc;
-  margin-top: 20px;
   border-radius: 5px;
+}
+
+#businessForm button {
+  background: #28a745;
+  color: #fff;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 15px;
+}
+
+#businessForm button:hover {
+  background: #218838;
+}
+
+/* CSS for Resources Display */
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f4f4f4;
+  margin: 0;
+  padding: 0;
+}
+
+#startupQuestionsContainer {
+  width: 80%;
+  margin: auto;
+  padding: 20px;
+}
+
+.startup-question-button {
+  display: block;
+  width: 20%;
+  padding: 10px;
+  margin: 10px 0;
+  background: #000000;
+  color: #ffffff;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.startup-question-button:hover {
+  background: #3f3f3f;
+}
+
+#questionDetails {
+  display: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: white;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+  max-width: 80%;
+}
+
+#questionDetails button {
+  background: #dc3545;
+  margin-top: 10px;
+}
+
+#questionDetails button:hover {
+  background: #c82333;
 }

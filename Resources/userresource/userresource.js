@@ -1,44 +1,41 @@
 import { db, collection, addDoc } from "./firebase-config.js";
 
+// Questions specifically for students planning a startup
 const questions = [
-    "What factors should I consider when defining my business idea?",
-    "How do you determine whether a business idea is feasible?",
-    "What are the most common mistakes entrepreneurs make in the early stages?",
-    "How do you assess market demand for a new product or service?",
-    "What strategies do you use to analyze competitors?",
-    "How do you identify your target audience?",
-    "What trends in the industry should I be aware of before starting?",
-    "What are the most sustainable revenue models for a startup?",
-    "How do you price a product or service effectively?",
-    "What are some successful strategies for customer acquisition and retention?",
-    "What key operational processes should a startup focus on?",
-    "How do you manage supply chains and vendor relationships efficiently?",
-    "What are the best practices for hiring and managing employees in a small business?",
-    "What financial metrics should a new business track closely?",
-    "How do you create realistic financial projections?",
-    "What are the best ways to secure funding for a startup?",
-    "How do you manage cash flow effectively?",
-    "What are the most effective marketing strategies for a new business?",
-    "How important is branding in the early stages of a business?",
-    "How do you leverage digital marketing to grow a business?",
-    "When should a business start thinking about expansion?",
-    "What strategies have you used to scale a business successfully?",
-    "What challenges arise when scaling a business, and how do you overcome them?",
-    "What are the biggest risks that startups face, and how do you mitigate them?",
-    "Can you share a major challenge you faced and how you overcame it?",
-    "How do you handle business failures or setbacks?",
-    "What legal aspects should a startup consider before launching?",
-    "How do you protect intellectual property and business ideas?",
-    "What common legal mistakes do entrepreneurs make?",
-    "What’s one piece of advice you wish you had received before starting your business?",
-    "What habits or mindset contribute most to entrepreneurial success?",
-    "What is the best investment a new business can make?"
+    "What inspired your startup idea?",
+    "What problem does your startup solve?",
+    "How do you plan to validate your business idea?",
+    "What challenges do you anticipate in starting a business?",
+    "Who is your target audience, and how will you reach them?",
+    "What resources or mentorship do you need to succeed?",
+    "How will you fund your startup initially?",
+    "What are your short-term and long-term business goals?",
+    "How do you plan to differentiate from competitors?",
+    "What support do you need to launch successfully?"
 ];
 
-// Dynamically generate form questions
+// Form container
 const questionsContainer = document.getElementById("questionsContainer");
 
-questions.forEach((question, index) => {
+// Add personal details fields
+const form = document.getElementById("businessForm");
+form.insertAdjacentHTML("afterbegin", `
+    <label>Name:</label>
+    <input type="text" name="userName" required>
+    
+    <label>Company Name (if any):</label>
+    <input type="text" name="companyName">
+    
+    <label>Email:</label>
+    <input type="email" name="userEmail" required>
+    
+    <label>Years of Experience (if any):</label>
+    <input type="number" name="userExperience" min="0">
+`);
+
+// Generate form questions
+// Generate form questions
+questions.forEach((question, index) => { // ✅ Fix: Change 'tasks' to 'questions'
     const div = document.createElement("div");
     div.classList.add("question");
 
@@ -53,25 +50,30 @@ questions.forEach((question, index) => {
     questionsContainer.appendChild(div);
 });
 
+
 // Handle form submission
 document.getElementById("businessForm").addEventListener("submit", async function(event) {
     event.preventDefault();
 
-    let answers = {};
+    let answers = {
+        userName: document.querySelector('[name="userName"]').value,
+        companyName: document.querySelector('[name="companyName"]').value,
+        userEmail: document.querySelector('[name="userEmail"]').value,
+        userExperience: document.querySelector('[name="userExperience"]').value,
+        responses: {}
+    };
+
     questions.forEach((question, index) => {
         let answer = document.querySelector(`[name="answer${index}"]`).value;
-        answers[question] = answer;
+        answers.responses[question] = answer;
     });
 
     try {
-        await addDoc(collection(db, "business_plans"), {
-            timestamp: new Date(),
-            responses: answers
-        });
-        alert("Business plan submitted successfully!");
+        await addDoc(collection(db, "startup_questions"), answers);
+        alert("Your startup questions have been submitted successfully!");
         document.getElementById("businessForm").reset();
     } catch (error) {
-        console.error("Error adding document: ", error);
-        alert("Error saving data.");
+        console.error("Error saving data:", error);
+        alert("Error saving data. Please try again.");
     }
 });
